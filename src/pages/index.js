@@ -10,8 +10,8 @@ import Thoughts from '../components/thoughts'
 import SEO from '../components/seo'
 import useSiteMetadata from '../hooks/siteMetaData'
 
-function IndexPage() {
-  const { style } = useThemeContext()
+function IndexPage(props) {
+  const { style, theme } = useThemeContext()
   const { layout } = useSiteMetadata()
   return <Layout>
     <SEO />
@@ -19,7 +19,7 @@ function IndexPage() {
       <div className="container-lg py-6 p-responsive text-center">
         <MastHead metaData={true} />
         <div className="my-6">
-          <Projects />
+          <Projects {...props} />
         </div>
         <div className="my-6">
           <Interests />
@@ -34,7 +34,7 @@ function IndexPage() {
         </div>
         <div className="col-md-7 col-lg-8 col-xl-9 px-4 py-6 px-lg-7 border-top border-md-top-0" style={{ backgroundColor: style === 'dark' ? "#2f363d" : "#fafbfc" }}>
           <div className="mx-auto" style={{ maxWidth: '900px' }}>
-            <Projects />
+            <Projects {...props} theme={theme} />
             <Interests />
             <Thoughts />
           </div>

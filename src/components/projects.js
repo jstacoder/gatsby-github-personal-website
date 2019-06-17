@@ -1,9 +1,9 @@
-import React from "react"
-import { useStaticQuery, graphql } from "gatsby"
-import RepoCard from "./repoCard"
-import useThemeContext from "../hooks/themeContext"
+import React from 'react'
+import { useStaticQuery, graphql } from 'gatsby'
+import RepoCard from './repoCard'
+import useThemeContext from '../hooks/themeContext'
 
-function Projects() {
+function Projects(props) {
   const { style } = useThemeContext()
   const { github: { viewer: { repositories } } } = useStaticQuery(
     graphql`
@@ -22,6 +22,10 @@ function Projects() {
                   totalCount
                 }
                 forkCount
+                language: primaryLanguage {
+                  color
+                  name
+                }
               }
             }
           }
@@ -36,7 +40,7 @@ function Projects() {
       <div className="d-sm-flex flex-wrap gutter-condensed mb-4">
         {repositories.nodes.map((repository, i) => (
           <div key={i} className="col-sm-6 col-md-12 col-lg-6 col-xl-4 mb-3">
-            <RepoCard repository={repository} />
+            <RepoCard {...props} repository={repository} />
           </div>
         ))}</div>
     </>
